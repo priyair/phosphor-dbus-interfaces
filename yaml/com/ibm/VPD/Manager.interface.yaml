@@ -27,6 +27,31 @@ methods:
           - com.ibm.VPD.Error.RecordNotFound
           - com.ibm.VPD.Error.KeywordNotFound
 
+    - name: UpdateKeyword
+      description: >
+          Method to update a single keyword's value based on the input
+          parameters.
+      parameters:
+          - name: path
+            type: string
+            description: >
+                Path where the data resides (D-Bus inventory path/EEPROM path
+                etc).
+          - name: paramsToWriteData
+            type:
+                variant[struct[string,string,array[byte]],
+                struct[string,array[byte]]]
+            description: >
+                Parameters in required format to write the keyword's value.
+      returns:
+          - name: bytesUpdated
+            type: ssize
+            description: >
+                On success, returns the number of bytes updated. On failure,
+                returns -1.
+      errors:
+          - xyz.openbmc_project.Common.Error.InvalidArgument
+
     - name: GetFRUsByUnexpandedLocationCode
       description: >
           A method to get list of FRU D-BUS object paths for a given unexpanded

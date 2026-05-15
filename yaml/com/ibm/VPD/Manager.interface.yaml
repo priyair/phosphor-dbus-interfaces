@@ -75,6 +75,28 @@ methods:
       errors:
           - xyz.openbmc_project.Common.Error.InvalidArgument
 
+    - name: ReadKeyword
+      description: >
+          Method to read a single keyword's value based on the input parameters.
+      parameters:
+          - name: path
+            type: string
+            description: >
+                EEPROM path of the FRU.
+          - name: paramsToReadData
+            type: variant[struct[string,string],string]
+            description: >
+                Parameters in required format to read the keyword's value.
+      returns:
+          - name: keywordValue
+            type: variant[array[byte]]
+            description: >
+                On success, returns the keyword's value. On failure, throws an
+                exception.
+      errors:
+          - xyz.openbmc_project.Common.Error.InvalidArgument
+          - xyz.openbmc_project.Common.Device.Error.ReadFailure
+
     - name: GetFRUsByUnexpandedLocationCode
       description: >
           A method to get list of FRU D-BUS object paths for a given unexpanded
